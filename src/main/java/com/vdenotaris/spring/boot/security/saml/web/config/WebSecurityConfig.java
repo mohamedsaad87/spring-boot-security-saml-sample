@@ -37,7 +37,6 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -99,7 +98,7 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.vdenotaris.spring.boot.security.saml.web.core.SAMLUserDetailsServiceImpl;
- 
+import org.springframework.core.env.*; 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -214,10 +213,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
         DefaultResourceLoader loader = new DefaultResourceLoader();
         Resource storeFile = loader
                 .getResource("classpath:/saml/samlKeystore.jks");
-        String storePass = "admin";
+        String storePass = "nalle123";
         Map<String, String> passwords = new HashMap<String, String>();
-        passwords.put("spring-boot-sso", "admin");
-        String defaultKey = "spring-boot-sso";
+        passwords.put("apollo", "nalle123");
+        String defaultKey = "apollo";
         return new JKSKeyManager(storeFile, storePass, passwords, defaultKey);
     }
  
@@ -242,28 +241,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
         samlEntryPoint.setDefaultProfileOptions(defaultWebSSOProfileOptions());
         return samlEntryPoint;
     }
-
-    @Bean
-    @Qualifier("idp-keycloak")
-    public ExtendedMetadataDelegate keycloakExtendedMetadataProvider(Environment env)
-            throws MetadataProviderException {
-        String idpKeycloakMetadataURL = env.getRequiredProperty("keycloak.auth-server-url") + "/protocol/saml/descriptor";
-        HTTPMetadataProvider httpMetadataProvider = new HTTPMetadataProvider(
-                this.backgroundTaskTimer, httpClient(), idpKeycloakMetadataURL);
-        httpMetadataProvider.setParserPool(parserPool());
-        ExtendedMetadataDelegate extendedMetadataDelegate =
-                new ExtendedMetadataDelegate(httpMetadataProvider, extendedMetadata());
-        extendedMetadataDelegate.setMetadataTrustCheck(true);
-        extendedMetadataDelegate.setMetadataRequireSignature(false);
-        backgroundTaskTimer.purge();
-        return extendedMetadataDelegate;
-    }
-    @Bean
-    @Qualifier("metadata")
-    public CachingMetadataManager metadata(List<MetadataProvider> providers) throws MetadataProviderException
-    {
-        return new CachingMetadataManager(providers);
-    }
     
     // Setup advanced info about metadata
     @Bean
@@ -273,6 +250,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
 	    	extendedMetadata.setSignMetadata(false);
 	    	extendedMetadata.setEcpEnabled(true);
 	    	return extendedMetadata;
+    }
+    @Bean
+    @Qualifier("idp-keycloak")
+    public ExtendedMetadataDelegate keycloakExtendedMetadataProvider(Environment env)
+            throws MetadataProviderException {
+        String idpKeycloakMetadataURL = 
+        env.getRequiredProperty("keycloak.auth-server-url") + "/protocol/saml/descriptor";
+        HTTPMetadataProvider httpMetadataProvider = new HTTPMetadataProvider(
+                this.backgroundTaskTimer, httpClient(), idpKeycloakMetadataURL);
+        httpMetadataProvider.setParserPool(parserPool());
+        ExtendedMetadataDelegate extendedMetadataDelegate =
+                new ExtendedMetadataDelegate(httpMetadataProvider, extendedMetadata());
+        extendedMetadataDelegate.setMetadataTrustCheck(true);
+        extendedMetadataDelegate.setMetadataRequireSignature(false);
+        backgroundTaskTimer.purge();
+        return extendedMetadataDelegate;
     }
     
     // IDP Discovery Service
@@ -287,7 +280,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
 	@Qualifier("idp-ssocircle")
 	public ExtendedMetadataDelegate ssoCircleExtendedMetadataProvider()
 			throws MetadataProviderException {
-		String idpSSOCircleMetadataURL = "https://sso-sso-demo.apps.fwalkersso.lab.upshift.rdu2.redhat.com/idp-meta.xml";
+		String idpSSOCircleMetadataURL = "https://idp.ssocircle.com/idp-meta.xml";
 		HTTPMetadataProvider httpMetadataProvider = new HTTPMetadataProvider(
 				this.backgroundTaskTimer, httpClient(), idpSSOCircleMetadataURL);
 		httpMetadataProvider.setParserPool(parserPool());
@@ -302,19 +295,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
     // IDP Metadata configuration - paths to metadata of IDPs in circle of trust
     // is here
     // Do no forget to call iniitalize method on providers
-    @Bean
+   /* @Bean
     @Qualifier("metadata")
     public CachingMetadataManager metadata() throws MetadataProviderException {
         List<MetadataProvider> providers = new ArrayList<MetadataProvider>();
         providers.add(ssoCircleExtendedMetadataProvider());
         return new CachingMetadataManager(providers);
     }
- 
+ */
+  @Bean 
+ @Qualifier("metadata") 
+public CachingMetadataManager metadata(List<MetadataProvider> providers) throws MetadataProviderException { return new CachingMetadataManager(providers); }
     // Filter automatically generates default SP metadata
     @Bean
     public MetadataGenerator metadataGenerator() {
         MetadataGenerator metadataGenerator = new MetadataGenerator();
-        metadataGenerator.setEntityId("spring-boot-sso");
+        metadataGenerator.setEntityId("com:vdenotaris:spring:sp");
         metadataGenerator.setExtendedMetadata(extendedMetadata());
         metadataGenerator.setIncludeDiscoveryExtension(false);
         metadataGenerator.setKeyManager(keyManager()); 
