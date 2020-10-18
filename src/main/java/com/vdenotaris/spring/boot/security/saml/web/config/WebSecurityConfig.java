@@ -206,7 +206,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
     public SingleLogoutProfile logoutprofile() {
         return new SingleLogoutProfileImpl();
     }
- 
+ /*
     // Central storage of cryptographic keys
     @Bean
     public KeyManager keyManager() {
@@ -219,7 +219,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
         String defaultKey = "apollo";
         return new JKSKeyManager(storeFile, storePass, passwords, defaultKey);
     }
- 
+ */
     // Setup TLS Socket Factory
     @Bean
     public TLSProtocolConfigurer tlsProtocolConfigurer() {
@@ -255,8 +255,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
     @Qualifier("idp-keycloak")
     public ExtendedMetadataDelegate keycloakExtendedMetadataProvider(Environment env)
             throws MetadataProviderException {
-        String idpKeycloakMetadataURL = 
-        env.getRequiredProperty("keycloak.auth-server-url") + "/protocol/saml/descriptor";
+        String idpKeycloakMetadataURL =env.getRequiredProperty("keycloak.auth-server-url") + "/protocol/saml/descriptor";
         HTTPMetadataProvider httpMetadataProvider = new HTTPMetadataProvider(
                 this.backgroundTaskTimer, httpClient(), idpKeycloakMetadataURL);
         httpMetadataProvider.setParserPool(parserPool());
