@@ -105,12 +105,7 @@
 			<version>1.0.3.RELEASE</version>
 		</dependency>
 	</dependencies>
-	
-	<scm>
-		<connection>scm:git:git@github.com:vdenotaris/spring-boot-security-saml-sample.git</connection>
-		<url>scm:git:git@github.com:vdenotaris/spring-boot-security-saml-sample.git</url>
-		<developerConnection>scm:git:git@github.com:vdenotaris/spring-boot-security-saml-sample.git</developerConnection>
-	</scm>
+
 	
 	<build>
 		<plugins>
