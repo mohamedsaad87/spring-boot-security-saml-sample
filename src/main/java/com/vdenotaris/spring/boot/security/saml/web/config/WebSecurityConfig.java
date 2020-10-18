@@ -206,7 +206,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
     public SingleLogoutProfile logoutprofile() {
         return new SingleLogoutProfileImpl();
     }
- /*
+ 
     // Central storage of cryptographic keys
     @Bean
     public KeyManager keyManager() {
@@ -219,7 +219,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
         String defaultKey = "apollo";
         return new JKSKeyManager(storeFile, storePass, passwords, defaultKey);
     }
- */
+ 
     // Setup TLS Socket Factory
     @Bean
     public TLSProtocolConfigurer tlsProtocolConfigurer() {
