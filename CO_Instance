@@ -1,0 +1,281 @@
+apiVersion: logging.openshift.io/v1
+kind: ClusterLogging
+metadata:
+  creationTimestamp: '2020-10-22T12:02:49Z'
+  generation: 1
+  managedFields:
+    - apiVersion: logging.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          .: {}
+          'f:collection':
+            .: {}
+            'f:logs':
+              .: {}
+              'f:fluentd': {}
+              'f:type': {}
+          'f:curation':
+            .: {}
+            'f:curator':
+              .: {}
+              'f:nodeSelector': {}
+              'f:schedule': {}
+            'f:type': {}
+          'f:logStore':
+            .: {}
+            'f:elasticsearch':
+              .: {}
+              'f:nodeCount': {}
+              'f:nodeSelector': {}
+              'f:redundancyPolicy': {}
+              'f:storage':
+                .: {}
+                'f:size': {}
+                'f:storageClassName': {}
+            'f:retentionPolicy':
+              .: {}
+              'f:application':
+                .: {}
+                'f:maxAge': {}
+              'f:audit':
+                .: {}
+                'f:maxAge': {}
+              'f:infra':
+                .: {}
+                'f:maxAge': {}
+            'f:type': {}
+          'f:managementState': {}
+          'f:visualization':
+            .: {}
+            'f:kibana':
+              .: {}
+              'f:nodeSelector': {}
+              'f:replicas': {}
+            'f:type': {}
+      manager: Mozilla
+      operation: Update
+      time: '2020-10-22T12:02:49Z'
+    - apiVersion: logging.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:collection':
+            'f:logs':
+              'f:fluentd':
+                'f:resources': {}
+          'f:curation':
+            'f:curator':
+              'f:nodeSelector':
+                'f:kubernetes.io/os': {}
+                'f:node-role.kubernetes.io/infra': {}
+              'f:resources': {}
+          'f:logStore':
+            'f:elasticsearch':
+              'f:nodeSelector':
+                'f:node-role.kubernetes.io/infra': {}
+              'f:resources': {}
+          'f:visualization':
+            'f:kibana':
+              'f:nodeSelector':
+                'f:node-role.kubernetes.io/infra': {}
+              'f:proxy':
+                .: {}
+                'f:resources': {}
+              'f:resources': {}
+        'f:status':
+          .: {}
+          'f:collection':
+            .: {}
+            'f:logs':
+              .: {}
+              'f:fluentdStatus':
+                .: {}
+                'f:daemonSet': {}
+                'f:nodes':
+                  'f:fluentd-lk5lp': {}
+                  'f:fluentd-wtxbb': {}
+                  'f:fluentd-nx68g': {}
+                  'f:fluentd-kzmrp': {}
+                  'f:fluentd-pz57h': {}
+                  'f:fluentd-hcq4z': {}
+                  'f:fluentd-dszxj': {}
+                  'f:fluentd-wqlf2': {}
+                  'f:fluentd-h29c2': {}
+                  'f:fluentd-qgc9k': {}
+                  'f:fluentd-n7mwr': {}
+                  'f:fluentd-kfvdk': {}
+                  'f:fluentd-qkrjv': {}
+                  .: {}
+                  'f:fluentd-84knf': {}
+                  'f:fluentd-xgkht': {}
+                  'f:fluentd-k97bb': {}
+                  'f:fluentd-fgkml': {}
+                  'f:fluentd-sxr4s': {}
+                  'f:fluentd-z5zvl': {}
+                  'f:fluentd-jg4v6': {}
+                'f:pods':
+                  .: {}
+                  'f:failed': {}
+                  'f:notReady': {}
+                  'f:ready': {}
+          'f:curation':
+            .: {}
+            'f:curatorStatus': {}
+          'f:logStore':
+            .: {}
+            'f:elasticsearchStatus': {}
+          'f:visualization':
+            .: {}
+            'f:kibanaStatus': {}
+      manager: cluster-logging-operator
+      operation: Update
+      time: '2020-10-22T14:32:52Z'
+  name: instance
+  namespace: openshift-logging
+  resourceVersion: '43838518'
+  selfLink: >-
+    /apis/logging.openshift.io/v1/namespaces/openshift-logging/clusterloggings/instance
+  uid: aef3458c-fd63-4bec-b931-0f8fefeec897
+spec:
+  collection:
+    logs:
+      fluentd: {}
+      type: fluentd
+  curation:
+    curator:
+      nodeSelector:
+        node-role.kubernetes.io/infra: null
+      schedule: 30 3 * * *
+    type: curator
+  logStore:
+    elasticsearch:
+      nodeCount: 3
+      nodeSelector:
+        node-role.kubernetes.io/infra: null
+      redundancyPolicy: SingleRedundancy
+      storage:
+        size: 200G
+        storageClassName: thin
+    retentionPolicy:
+      application:
+        maxAge: 1d
+      audit:
+        maxAge: 7d
+      infra:
+        maxAge: 7d
+    type: elasticsearch
+  managementState: Managed
+  visualization:
+    kibana:
+      nodeSelector:
+        node-role.kubernetes.io/infra: null
+      replicas: 1
+    type: kibana
+status:
+  collection:
+    logs:
+      fluentdStatus:
+        daemonSet: fluentd
+        nodes:
+          fluentd-84knf: ocpworker03.xx
+          fluentd-xgkht: ocpworker07.xx
+          fluentd-k97bb: ocpinfra03.xx
+          fluentd-fgkml: ocpworker01.xx
+          fluentd-sxr4s: ocpmaster03.xx
+          fluentd-z5zvl: ocpworker14.xx
+          fluentd-jg4v6: ocpinfra01.xx
+          fluentd-lk5lp: ocpworker09.xx
+          fluentd-wtxbb: ocpworker11.xx
+          fluentd-nx68g: ocpinfra02.xx
+          fluentd-kzmrp: ocpworker13.xx
+          fluentd-pz57h: ocpmaster01.xx
+          fluentd-hcq4z: ocpworker04.xx
+          fluentd-dszxj: ocpworker05.xx
+          fluentd-wqlf2: ocpworker02.xx
+          fluentd-h29c2: ocpworker10.xx
+          fluentd-qgc9k: ocpworker12.xx
+          fluentd-n7mwr: ocpmaster02.xx
+          fluentd-kfvdk: ocpworker08.xx
+          fluentd-qkrjv: ocpworker06.xx
+        pods:
+          failed: []
+          notReady: []
+          ready:
+            - fluentd-84knf
+            - fluentd-dszxj
+            - fluentd-fgkml
+            - fluentd-h29c2
+            - fluentd-hcq4z
+            - fluentd-jg4v6
+            - fluentd-k97bb
+            - fluentd-kfvdk
+            - fluentd-kzmrp
+            - fluentd-lk5lp
+            - fluentd-n7mwr
+            - fluentd-nx68g
+            - fluentd-pz57h
+            - fluentd-qgc9k
+            - fluentd-qkrjv
+            - fluentd-sxr4s
+            - fluentd-wqlf2
+            - fluentd-wtxbb
+            - fluentd-xgkht
+            - fluentd-z5zvl
+  curation:
+    curatorStatus:
+      - cronJobs: curator
+        schedules: 30 3 * * *
+        suspended: false
+  logStore:
+    elasticsearchStatus:
+      - cluster:
+          numDataNodes: 3
+          initializingShards: 0
+          numNodes: 3
+          activePrimaryShards: 23
+          status: green
+          pendingTasks: 0
+          relocatingShards: 0
+          activeShards: 46
+          unassignedShards: 0
+        clusterName: elasticsearch
+        nodeConditions:
+          elasticsearch-cdm-q1bbfjqi-1: []
+          elasticsearch-cdm-q1bbfjqi-2: []
+          elasticsearch-cdm-q1bbfjqi-3: []
+        nodeCount: 3
+        pods:
+          client:
+            failed: []
+            notReady: []
+            ready:
+              - elasticsearch-cdm-q1bbfjqi-1-64b74bdf4f-rng84
+              - elasticsearch-cdm-q1bbfjqi-2-77978bdd68-2xrz9
+              - elasticsearch-cdm-q1bbfjqi-3-6bbd6b4587-mpmr6
+          data:
+            failed: []
+            notReady: []
+            ready:
+              - elasticsearch-cdm-q1bbfjqi-1-64b74bdf4f-rng84
+              - elasticsearch-cdm-q1bbfjqi-2-77978bdd68-2xrz9
+              - elasticsearch-cdm-q1bbfjqi-3-6bbd6b4587-mpmr6
+          master:
+            failed: []
+            notReady: []
+            ready:
+              - elasticsearch-cdm-q1bbfjqi-1-64b74bdf4f-rng84
+              - elasticsearch-cdm-q1bbfjqi-2-77978bdd68-2xrz9
+              - elasticsearch-cdm-q1bbfjqi-3-6bbd6b4587-mpmr6
+        shardAllocationEnabled: all
+  visualization:
+    kibanaStatus:
+      - deployment: kibana
+        pods:
+          failed: []
+          notReady: []
+          ready:
+            - kibana-5448d776cc-q7fz7
+        replicaSets:
+          - kibana-5448d776cc
+        replicas: 1
