@@ -1,0 +1,12 @@
+[retry_clo_default_output_es] failed to flush the buffer. retry_time=3 next_retry_seconds=2020-10-22 14:32:10 +0000 chunk="5af9f933981661d5b7d03097f685ce6e" error_class=Fluent::Plugin::ElasticsearchOutput::RecoverableRequestFailure error="could not push logs to Elasticsearch cluster ({:host=>\"elasticsearch.openshift-logging.svc.cluster.local\", :port=>9200, :scheme=>\"https\", :user=>\"fluentd\", :password=>\"obfuscated\"}): [500] {\"error\":{\"root_cause\":[{\"type\":\"json_parse_exception\",\"reason\":\"Invalid UTF-8 start byte 0x92\\n at [Source: org.elasticsearch.transport.netty4.ByteBufStreamInput@36cc2ee5; line: 1, column: 104]\"}],\"type\":\"json_parse_exception\",\"reason\":\"Invalid UTF-8 start byte 0x92\\n at [Source: org.elasticsearch.transport.netty4.ByteBufStreamInput@36cc2ee5; line: 1, column: 104]\"},\"status\":500}"
+
+
+
+root_cause\":[{\"type\":\"json_parse_exception\",\"reason\":\"Invalid UTF-8 start byte 0x92\\n at [Source: org.elasticsearch.transport.netty4.ByteBufStreamInput@36cc2ee5; line: 1, column: 104]\"}],\"type\":\"json_parse_exception\",\"reason\":\"Invalid UTF-8 start byte 0x92\\n at [Source: org.elasticsearch.transport.netty4.ByteBufStreamInput@36cc2ee5; line: 1, column: 104]\"},\"status\":500}"
+
+
+
+
+
+2020-10-22 14:09:18 +0000 [warn]: [retry_clo_default_output_es] buffer flush took longer time than slow_flush_log_threshold: elapsed_time=21.263902032049373 slow_flush_log_threshold=20.0 plugin_id="retry_clo_default_output_es"
+
